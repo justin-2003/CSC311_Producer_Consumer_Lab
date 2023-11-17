@@ -4,9 +4,13 @@ import java.util.List;
 
 public class ProducerConsumerDriver {
     private static final int MAX_QUEUE_CAPACITY = 5;
+    private static final int SINGLE_PRODUCER_CONSUMER_DURATION_SECONDS = 2;
+    private static final int MULTIPLE_PRODUCER_CONSUMER_DURATION_SECONDS = 10;
 
     public static void demoSingleProducerAndSingleConsumer() {
         DataQueue dataQueue = new DataQueue(MAX_QUEUE_CAPACITY);
+
+
 
         Producer producer = new Producer(dataQueue);
         Thread producerThread = new Thread(producer);
@@ -22,7 +26,7 @@ public class ProducerConsumerDriver {
         threads.add(consumerThread);
 
         // let threads run for two seconds
-        MyThread.sleep(2000);
+        MyThread.sleep(SINGLE_PRODUCER_CONSUMER_DURATION_SECONDS);
 
         // stop threads
         producer.stop();
@@ -56,7 +60,7 @@ public class ProducerConsumerDriver {
         }
 
         // let threads run for ten seconds
-        MyThread.sleep(10000);
+        MyThread.sleep(MULTIPLE_PRODUCER_CONSUMER_DURATION_SECONDS );
 
         // stop threads
         consumers.forEach(Consumer::stop);
